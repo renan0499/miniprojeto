@@ -77,7 +77,7 @@ int main()
           break;
       }
       /*Game over*/
-    if (plays == 3){
+    if (plays == 10){
       puts(MSG_MAX);
       print_status(level, score, plays);
       puts(MSG_OVER);
@@ -123,6 +123,7 @@ int rand_number(int min, int max, int score)
   int n[4];
   int ordenado;
   int score_sum = 0;
+  int j;
 
   srand(time(0));
 
@@ -132,7 +133,7 @@ int rand_number(int min, int max, int score)
     printf ("%d, ", num[i]);
   } 
   printf("\n");
-  while(ordenado == 0) 
+  /*while(ordenado == 0) 
   {
     ordenado = 1;
     for (i=0;i<4;i++)
@@ -146,10 +147,18 @@ int rand_number(int min, int max, int score)
         ordenado = 0;
       }
     }
+  }*/
+  for (i=0;i<4;i++){
+    for (j=0;j<4;j++){
+      if (num[j] > num[i]){
+        int tmp = num[i];
+        num[i] = num[j];
+        num[j] = tmp;
+      }
+    }
   }
   scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
-
-  if (n[4] == n[i+1])
+  if (n1 == num[0] && n2 == num[1] && n3 == num[2] && n4 == num[3])
   {
     puts(MSG_WELL);
     score_sum = score + 5;
@@ -158,7 +167,7 @@ int rand_number(int min, int max, int score)
   else
   {
     puts(MSG_WRONG);
-    score_sum = score + 5;
+    score_sum = score;
     return score_sum;
   }
     
