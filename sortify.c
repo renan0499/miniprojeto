@@ -199,7 +199,6 @@ int rand_number(int min, int max, int score)
   {
     puts(MSG_WRONG);
     score_sum = score;
-    print_menu();
     return score_sum;
   }
     
