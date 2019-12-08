@@ -13,7 +13,7 @@
 #define MSG_MAX "You have reached the maximum number of moves."
 #define MSG_BYE "Bye."
 #define MSG_UNKNOWN "Unknown option."
-/* Use puts() to print constant strings */
+/* Usar puts() para imprirmir strings constantes */
 
 int rand_number(int, int, int);
 void print_status(int, int, int);
@@ -47,7 +47,7 @@ int main()
           puts(MSG_SORT);
           score = rand_number(min, max, score);
           plays++;
-          /*Level info*/
+          /*Informação de nivel*/
           if (score <=10)
           {
             level = 1;
@@ -86,10 +86,10 @@ int main()
   }
 }
 
-/* generate four random integers between min and max */
+/* generar 4 numeros aleatorios entre o maximo e o minimo */
 int rand_number(int min, int max, int score)
 {
-  /* Level specifications */
+  /* especificação de nivel */
   if (score <=10)
   {
     min = 0;
@@ -133,7 +133,7 @@ int rand_number(int min, int max, int score)
     printf ("%d, ", num[i]);
   } 
   printf("\n");
-  /*while(ordenado == 0) 
+  while(ordenado == 0) 
   {
     ordenado = 1;
     for (i=0;i<4;i++)
@@ -143,11 +143,11 @@ int rand_number(int min, int max, int score)
         int aux;
         aux = num[i];
         num[i]= num[i + 1];
-        num[i +1] = aux;
+        num[i + 1] = aux;
         ordenado = 0;
       }
     }
-  }*/
+  }
   for (i=0;i<4;i++){
     for (j=0;j<4;j++){
       if (num[j] > num[i]){
@@ -168,6 +168,7 @@ int rand_number(int min, int max, int score)
   {
     puts(MSG_WRONG);
     score_sum = score;
+    print_menu();
     return score_sum;
   }
     
@@ -175,7 +176,7 @@ int rand_number(int min, int max, int score)
 }
 
 
-/* print the game status */
+/* imprimir statuts do jogo */
 void print_status(int level, int score, int plays)
 {
 	puts("+-----------------------------+");
