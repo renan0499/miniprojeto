@@ -28,7 +28,6 @@ int main()
   int score = 0;
   int max = 0;
   int min = 0;
-  int loop = 0;
   int i;
 
 	puts(MSG_WELCOME);
@@ -52,15 +51,15 @@ int main()
           {
             level = 1;
           }
-          else if (10 < score <= 20)
+          else if (10 < score && score <= 20)
           {
             level = 2;
           }
-          else if (20 < score <= 30)
+          else if (20 < score && score <= 30)
           {
             level = 3;
           }
-          else if (30 < score <= 40)
+          else if (30 < score && score <= 40)
           {
             level = 4;
           }
@@ -72,12 +71,15 @@ int main()
         case 's':
           print_status(level, score, plays);
           break;
+        case 'm':
+          print_menu();
+          break;
         default:
           puts(MSG_UNKNOWN);
           break;
       }
       /*Game over*/
-    if (plays == 10){
+    if (plays == 29){
       puts(MSG_MAX);
       print_status(level, score, plays);
       puts(MSG_OVER);
@@ -95,59 +97,79 @@ int rand_number(int min, int max, int score)
     min = 0;
     max = 10;
   }
-  else if (10 < score <= 20)
+  else if (10 < score && score <= 20) 
   {
     min = 0;
     max = 30;
   }
-  else if (20 < score <= 30)
+  else if (20 < score && score <= 30)
   {
-    min = -50;
+    min = 50;
     max = 30;
   }
-  else if (30 < score <= 40)
+  else if (30 < score && score <= 40)
   {
-    min = -100;
-    max = 0;
+    min = 0;
+    max = 100;
   }
-    else if (40 < score)
+  else if (40 < score)
   {
-    min = -200;
-    max = -100;
+    min = 100;
+    max = 200;
   }
   
   int contagem = 4;
   int i = 0;
   int num[4];
   int n1, n2, n3, n4;
-  int n[4];
-  int ordenado;
   int score_sum = 0;
   int j;
 
   srand(time(0));
-
-  for (i = 0; i < contagem; i++)
+  /*Gera numemors para os niveis 1 e 2*/
+  if ( 0 <= score && score <= 20)
   {
-    num[i] = (rand() % (max - min + 1)) + min;
-    printf ("%d, ", num[i]);
-  } 
-  printf("\n");
-  while(ordenado == 0) 
-  {
-    ordenado = 1;
-    for (i=0;i<4;i++)
+    for (i = 0; i < contagem; i++)
     {
-      if (num[i] > num[i+1])
+      num[i] = (rand() % (max - min + 1)) + min;
+      printf ("%d", num[i]);
+      if (i != 3)
       {
-        int aux;
-        aux = num[i];
-        num[i]= num[i + 1];
-        num[i + 1] = aux;
-        ordenado = 0;
+        printf(", ");
+      }
+    } 
+  }
+  /*Gera numeros para o nivel 3*/
+  else if ( 20 < score && score <= 30)
+  {
+    num[0] = -1 * ((rand() % (min - 0 + 1)));
+    num[1] = (rand() % (max - 0 + 1));
+    num[2] = -1 * ((rand() % (min - 0 + 1)));
+    num[3] = (rand() % (max - 0 + 1));
+    for (i = 0; i < contagem; i++)
+    {
+      printf ("%d", num[i]);
+      if (i != 3)
+      {
+        printf(", ");
       }
     }
   }
+  /*Gera numeros para os níveis 4 e 5*/
+  else
+  {
+    for (i = 0; i < contagem; i++)
+    {
+      num[i] = -1 * ((rand() % (max - min + 1)) + min);
+      printf ("%d", num[i]);
+      if (i != 3)
+      {
+        printf(", ");
+      }
+    } 
+  }
+  printf("\n");
+   /*Por os numeros gerados em ordem crescente*/
   for (i=0;i<4;i++){
     for (j=0;j<4;j++){
       if (num[j] > num[i]){
@@ -157,6 +179,7 @@ int rand_number(int min, int max, int score)
       }
     }
   }
+  /*Verificação se o input foi certo ou errado*/
   scanf("%d %d %d %d", &n1, &n2, &n3, &n4);
   if (n1 == num[0] && n2 == num[1] && n3 == num[2] && n4 == num[3])
   {
