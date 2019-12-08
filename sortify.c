@@ -43,10 +43,7 @@ int main()
           return 0;
           break;
         case 'p':
-          puts(MSG_SORT);
-          score = rand_number(min, max, score);
-          plays++;
-          /*Informação de nivel*/
+        /*Informação de nivel*/
           if (score <=10)
           {
             level = 1;
@@ -63,10 +60,21 @@ int main()
           {
             level = 4;
           }
-            else if (40 < score)
+          else if (40 < score && score <= 50)
           {
             level = 5;
           }
+          else
+          {
+            level = 6;
+          }
+          if (level == 6)
+          {
+            break;
+          }
+          puts(MSG_SORT);
+          score = rand_number(min, max, score);
+          plays++;
          break;
         case 's':
           print_status(level, score, plays);
@@ -79,7 +87,7 @@ int main()
           break;
       }
       /*Game over*/
-    if (plays == 29){
+    if (plays == 29 || level == 6){
       puts(MSG_MAX);
       print_status(level, score, plays);
       puts(MSG_OVER);
@@ -112,7 +120,7 @@ int rand_number(int min, int max, int score)
     min = 0;
     max = 100;
   }
-  else if (40 < score)
+  else if (40 < score && score <= 50)
   {
     min = 100;
     max = 200;
